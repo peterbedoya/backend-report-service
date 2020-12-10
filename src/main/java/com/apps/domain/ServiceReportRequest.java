@@ -15,6 +15,8 @@ private String  startedDate;
 
 private String  endDate;
 
+private String weekYear;
+
 public ServiceReportRequest() {
 }
 
@@ -56,6 +58,14 @@ public String getEndDate() {
 
 public void setEndDate(String endDate) {
     this.endDate = endDate;
+}
+
+public String getWeekYear() {
+    return weekYear;
+}
+
+public void setWeekYear(String weekYear) {
+    this.weekYear = weekYear;
 }
 
 

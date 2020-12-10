@@ -3,17 +3,17 @@ package com.apps.domain;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ResposeDomain {
+public class ResponseDomain {
     
     private String status;
     private String errorCode;
     private String message;
     private Object data;
 
-    public ResposeDomain() {
+    public ResponseDomain() {
     }
 
-    public ResposeDomain(String status, String errorCode, String message, Object data) {
+    public ResponseDomain(String status, String errorCode, String message, Object data) {
         this.status = status;
         this.errorCode = errorCode;
         this.message = message;
