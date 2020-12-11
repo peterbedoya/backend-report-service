@@ -1,5 +1,7 @@
 package com.apps.models;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,16 +20,16 @@ private String  technicalId;
 @Column(name="service_id", nullable = false)
 private String  serviceId;
 @Column(name="started_date", nullable = false)
-private String  startedDate;
+private Date  startedDate;
 @Column(name="end_date", nullable = false)
-private String  endDate;
+private Date  endDate;
 
 public ServiceReport() {
 }
 
 
-public ServiceReport(Integer serviceReportId, String technicalId, String serviceId, String startedDate,
-        String endDate) {
+public ServiceReport(Integer serviceReportId, String technicalId, String serviceId, Date startedDate,
+Date endDate) {
     this.serviceReportId = serviceReportId;
     this.technicalId = technicalId;
     this.serviceId = serviceId;
@@ -60,19 +62,19 @@ public void setServiceId(String serviceId) {
     this.serviceId = serviceId;
 }
 
-public String getStartedDate() {
+public Date getStartedDate() {
     return startedDate;
 }
 
-public void setStartedDate(String startedDate) {
+public void setStartedDate(Date startedDate) {
     this.startedDate = startedDate;
 }
 
-public String getEndDate() {
+public Date getEndDate() {
     return endDate;
 }
 
-public void setEndDate(String endDate) {
+public void setEndDate(Date endDate) {
     this.endDate = endDate;
 }
 
