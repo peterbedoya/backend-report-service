@@ -1,73 +1,73 @@
 package com.apps.domain;
 
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ServiceReportRequest {
-    
-private Integer serviceReportId;
 
-private String  technicalId;
+	private Integer serviceReportId;
 
-private String  serviceId;
+	private String technicalId;
 
-private String  startedDate;
+	private String serviceId;
 
-private String  endDate;
+	private Date startedDate;
 
-private String weekYear;
+	private Date endDate;
 
-public ServiceReportRequest() {
-}
+	private Integer weekYear;
 
-public Integer getServiceReportId() {
-    return serviceReportId;
-}
+	public ServiceReportRequest() {
+	}
 
-public void setServiceReportId(Integer serviceReportId) {
-    this.serviceReportId = serviceReportId;
-}
+	public Integer getServiceReportId() {
+		return serviceReportId;
+	}
 
-public String getTechnicalId() {
-    return technicalId;
-}
+	public void setServiceReportId(Integer serviceReportId) {
+		this.serviceReportId = serviceReportId;
+	}
 
-public void setTechnicalId(String technicalId) {
-    this.technicalId = technicalId;
-}
+	public String getTechnicalId() {
+		return technicalId;
+	}
 
-public String getServiceId() {
-    return serviceId;
-}
+	public void setTechnicalId(String technicalId) {
+		this.technicalId = technicalId;
+	}
 
-public void setServiceId(String serviceId) {
-    this.serviceId = serviceId;
-}
+	public String getServiceId() {
+		return serviceId;
+	}
 
-public String getStartedDate() {
-    return startedDate;
-}
+	public void setServiceId(String serviceId) {
+		this.serviceId = serviceId;
+	}
 
-public void setStartedDate(String startedDate) {
-    this.startedDate = startedDate;
-}
+	public Date getStartedDate() {
+		return startedDate;
+	}
 
-public String getEndDate() {
-    return endDate;
-}
+	public void setStartedDate(Date startedDate) {
+		this.startedDate = startedDate;
+	}
 
-public void setEndDate(String endDate) {
-    this.endDate = endDate;
-}
+	public Date getEndDate() {
+		return endDate;
+	}
 
-public String getWeekYear() {
-    return weekYear;
-}
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
 
-public void setWeekYear(String weekYear) {
-    this.weekYear = weekYear;
-}
+	public Integer getWeekYear() {
+		return weekYear;
+	}
 
-
+	public void setWeekYear(Integer weekYear) {
+		this.weekYear = weekYear;
+	}
 
 }

@@ -17,6 +17,6 @@ CREATE TABLE parameter
 (
   parameter_id INT AUTO_INCREMENT PRIMARY KEY,
   type_parameter VARCHAR,
-  start_time Date,
-  end_time Date
+  start_time VARCHAR,
+  end_time VARCHAR
 );
