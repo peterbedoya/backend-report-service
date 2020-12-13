@@ -33,26 +33,25 @@ class CalculatorServiceUnitTest {
 
     @Test
     public void shouldCalculateHours() throws Exception {
-    	ServiceReportRequest serviceReportRequest = new ServiceReportRequest();
-    	serviceReportRequest.setTechnicalId("123456789");
-    	serviceReportRequest.setWeekYear(50);
-        when(serviceReportRepository.findbytechnicalIdAndWeekYear(serviceReportRequest.getTechnicalId(),serviceReportRequest.getWeekYear())).thenReturn(ServiceReportObjectMother.buildList());
+    	ServiceReportRequest serviceReportRequest = ServiceReportObjectMother.buildServiceReportRequest();
+    	ReportHours reportHoursToExpect= ServiceReportObjectMother.buildReportHoursToExpect();
+    	
+        when(serviceReportRepository.findbytechnicalIdAndWeekYear(serviceReportRequest.getTechnicalId(),serviceReportRequest.getWeekYear()))
+        							.thenReturn(ServiceReportObjectMother.buildList());
         ReportHours reportHours= calculatorService.calculateHours(serviceReportRequest);
         
-        log.info(reportHours);
-    	assertThat((reportHours.getTotalNormalHours())).isEqualTo(48.0);
-    	assertThat((reportHours.getTotalNormalExtraHours())).isEqualTo(4.0);
-    	assertThat((reportHours.getTotalSundayHours())).isEqualTo(0.0);
-    	assertThat((reportHours.getTotalSundayExtraHours())).isEqualTo(17.5);
-    	assertThat((reportHours.getTotalNightHours())).isEqualTo(0.0);
+    	assertThat((reportHours.getTotalNormalHours())).isEqualTo(reportHoursToExpect.getTotalNormalHours());
+    	assertThat((reportHours.getTotalNormalExtraHours())).isEqualTo(0.0);
+    	assertThat((reportHours.getTotalSundayHours())).isEqualTo(reportHoursToExpect.getTotalSundayHours());
+    	assertThat((reportHours.getTotalSundayExtraHours())).isEqualTo(0.0);
+    	assertThat((reportHours.getTotalNightHours())).isEqualTo(reportHoursToExpect.getTotalNightHours());
     	assertThat((reportHours.getTotalNightExtraHours())).isEqualTo(0.0);
     }
     
     @Test
     public void shouldReturnZeroWhenNotExistReports() throws Exception {
-    	ServiceReportRequest serviceReportRequest = new ServiceReportRequest();
-    	serviceReportRequest.setTechnicalId("123456789");
-    	serviceReportRequest.setWeekYear(30);
+    	ServiceReportRequest serviceReportRequest = ServiceReportObjectMother.buildServiceReportRequest();
+    	
         when(serviceReportRepository.findbytechnicalIdAndWeekYear(serviceReportRequest.getTechnicalId(),serviceReportRequest.getWeekYear())).thenReturn(ServiceReportObjectMother.buildListEmty());
         ReportHours reportHours= calculatorService.calculateHours(serviceReportRequest);
         log.info(reportHours);
