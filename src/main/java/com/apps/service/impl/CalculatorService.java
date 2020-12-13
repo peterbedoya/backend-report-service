@@ -31,9 +31,18 @@ public class CalculatorService implements ICalculatorService {
 	@Override
 	public ServiceReport saveServiceReportHours(ServiceReportRequest request) {
 		// TODO Auto-generated method stub
-
+		
+		DateTime startedTime = new DateTime(request.getStartedDate().getTime());
+		DateTime endTime = new DateTime(request.getEndDate().getTime());
+		 
+		DateTime dtStartedTime = startedTime
+			    .withSecondOfMinute(0);
+		
+		DateTime dtEndTime = endTime
+			    .withSecondOfMinute(0);
+		
 		ServiceReport serviceReport = new ServiceReport(request.getTechnicalId(), request.getServiceId(),
-				request.getStartedDate(), request.getEndDate());
+				dtStartedTime.toDate(), dtEndTime.toDate());
 		return reportRepository.save(serviceReport);
 
 	}
