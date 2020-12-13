@@ -8,6 +8,7 @@ public class ReportHours {
 	private double totalSundayExtraHours;
 	private double totalNightHours ;
 	private double totalNightExtraHours;
+	private double totalHours;
 	
 	
 	
@@ -19,6 +20,7 @@ public class ReportHours {
 		this.totalSundayExtraHours = 0;
 		this.totalNightHours = 0;
 		this.totalNightExtraHours = 0;
+		this.totalHours = 0;
 	}
 
 
@@ -58,6 +60,14 @@ public class ReportHours {
 	}
 	public void setTotalNightExtraHours(double totalNightExtraHours) {
 		this.totalNightExtraHours = totalNightExtraHours;
+	}
+
+	public double getTotalHours() {
+		return totalHours;
+	}
+
+	public void setTotalHours(double totalHours) {
+		this.totalHours = totalHours;
 	}
 
 

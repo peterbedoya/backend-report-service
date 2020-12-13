@@ -15,12 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apps.domain.ReportHours;
-import com.apps.domain.ResponseDomain;
 import com.apps.domain.ServiceReportRequest;
 import com.apps.models.ServiceReport;
 import com.apps.repository.ServiceReportRepository;
 import com.apps.service.ICalculatorService;
-import com.apps.util.CaculatorUtil;
 
 @Service
 public class CalculatorService implements ICalculatorService {
@@ -44,13 +42,17 @@ public class CalculatorService implements ICalculatorService {
 	public ReportHours calculateHours(ServiceReportRequest request) {
 		log.info("Ejecutando mEtodo [@calculateSundayHours]");
 		ReportHours reportHours = new ReportHours();
-
+		double totalHours=0;
 		List<ServiceReport> serviceReports = (List<ServiceReport>) reportRepository
 				.findbytechnicalIdAndWeekYear(request.getTechnicalId(), request.getWeekYear());
 		
+	
 		if(!serviceReports.isEmpty()) {
 		reportHours.setTotalNormalHours(calculateNormalHours(serviceReports));
-
+		reportHours.setTotalNightHours(calculateNightHours( serviceReports));
+		reportHours.setTotalSundayHours(calculateSundayHours(serviceReports));
+		
+		
 		if (reportHours.getTotalNormalHours() >= 48) {
 			reportHours.setTotalNormalExtraHours(reportHours.getTotalNormalHours() - 48);
 			reportHours.setTotalNormalHours(48);
@@ -62,6 +64,11 @@ public class CalculatorService implements ICalculatorService {
 		}
 		
 		}
+		
+		totalHours=reportHours.getTotalNormalHours()+reportHours.getTotalNormalExtraHours()+reportHours.getTotalNightHours()+reportHours.getTotalNightExtraHours()
+		+reportHours.getTotalSundayHours()+reportHours.getTotalSundayExtraHours();
+		
+		reportHours.setTotalHours(totalHours);
 		return reportHours;
 
 	}
@@ -92,11 +99,19 @@ public class CalculatorService implements ICalculatorService {
 
 			DateTime startedTime = new DateTime(serviceReport.getStartedDate().getTime());
 			DateTime endTime = new DateTime(serviceReport.getEndDate().getTime());
-			if (startedTime.getHourOfDay() >= 20 && (endTime.getDayOfWeek() == startedTime.getDayOfWeek())) {
+			 
+			DateTime dt = endTime
+					.withDayOfWeek(endTime.getDayOfWeek()+1)
+				    .withHourOfDay(7)
+				    .withMinuteOfHour(0)
+				    .withSecondOfMinute(0);
+			
+			if (startedTime.getHourOfDay() >= 20 && endTime.getMillis()<=dt.getMillis()) {
+			
 				Duration duration = new Duration(startedTime.toDate().getTime(), endTime.toDate().getTime());
 				listHours.add(duration.toPeriod().toString(getPeriodFormatter()));
 			}
-
+			
 		});
 		return calculatePeriod(listHours);
 	}
